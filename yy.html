@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@nama_kamu</title>
+    <meta name="description" content="All my links">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 420px;
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        .profile-img {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 28px;
+        }
+
+        .username {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0 0 12px 0;
+        }
+        .verified {
+            width: 24px;
+            height: 24px;
+        }
+
+        .bio {
+            font-size: 1rem;
+            margin-bottom: 48px;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .link-btn {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .link-btn:hover {
+            background: #334155;
+        }
+
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 48px;
+        }
+        .social a {
+            color: #94a3b8;
+            font-size: 1.6rem;
+            transition: color 0.3s ease;
+        }
+        .social a:hover {
+            color: #e2e8f0;
+        }
+
+        footer {
+            margin-top: 64px;
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        /* Responsif ekstra */
+        @media (max-width: 480px) {
+            .profile-img { width: 110px; height: 110px; }
+            .username { font-size: 1.6rem; }
+            .verified { width: 20px; height: 20px; }
+            .link-btn { padding: 16px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- GANTI DENGAN FOTO PROFIL KAMU -->
+        <img src="https://media.istockphoto.com/id/1498431889/photo/studio-portrait-of-a-young-white-men-in-a-beige-shirt-against-a-gray-background.jpg?s=612x612&w=0&k=20&c=_6PXahi33TmFemEUTmM3vdirKsR-4MD89v4Ed1TZa8I=" alt="Profil" class="profile-img">
+
+        <div class="username">
+            @nama_kamu
+            <!-- GANTI DENGAN ICON VERIFIED KAMU SENDIRI (upload ke imgur/hosting) -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" alt="Verified" class="verified">
+        </div>
+
+        <p class="bio">Content Creator • Tech & Gaming<br>Kolaborasi terbuka</p>
+
+        <div class="links">
+            <!-- GANTI LINK SESUAI -->
+            <a href="https://youtube.com/@kamu" class="link-btn" target="_blank">YouTube</a>
+            <a href="https://tiktok.com/@kamu" class="link-btn" target="_blank">TikTok</a>
+            <a href="https://instagram.com/@kamu" class="link-btn" target="_blank">Instagram</a>
+            <a href="https://twitch.tv/kamu" class="link-btn" target="_blank">Twitch</a>
+            <a href="https://store.kamu.com" class="link-btn" target="_blank">Store (Beli Merch)</a>
+            <a href="mailto:business@kamu.com" class="link-btn">Business Inquiry</a>
+        </div>
+
+        <div class="social">
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+
+        <footer>
+            © 2025 @nama_kamu
+        </footer>
+    </div>
+
+</body>
+</html>
