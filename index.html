@@ -13,14 +13,14 @@
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
-            background: #0f172a url('https://thumbs.dreamstime.com/b/futuristic-abstract-dark-blue-grid-background-glowing-digital-lines-modern-technology-vibe-perfect-sci-fi-themes-398808920.jpg') center/cover no-repeat fixed;
+            background: #0f172a url('https://img.freepik.com/premium-vector/abstract-glowing-wave-lines-dark-blue-background-dynamic-wave-pattern-modern-flowing-wavy-lines-futuristic-technology-concept-suitable-banners-posters-covers-brochures-flyers-websites_180969-1937.jpg') center/cover no-repeat fixed;
             color: #e2e8f0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 48px 20px 64px;
+            padding: 48px 20px 120px; /* Extra bottom untuk fixed copyright */
             text-align: center;
             position: relative;
         }
@@ -28,8 +28,8 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(6px);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(8px);
             z-index: 1;
         }
         .container {
@@ -172,72 +172,101 @@
             transform: translateY(-4px);
         }
 
-        /* Tanda Air */
-        .watermark {
+        /* Copyright Fixed seperti Footer */
+        .copyright {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            font-size: 0.9rem;
-            opacity: 0.4;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.95rem;
+            opacity: 0.6;
             z-index: 2;
             pointer-events: none;
+            white-space: nowrap;
         }
 
-        /* Real Cookies Consent Banner */
-        .cookie-consent {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(30, 41, 59, 0.95);
-            color: #e2e8f0;
-            padding: 20px;
-            text-align: center;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+        /* Professional Centered Cookies Modal */
+        .cookie-modal {
             display: none;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
             align-items: center;
+            justify-content: center;
+            z-index: 200;
+            backdrop-filter: blur(8px);
         }
-        .cookie-consent.show {
+        .cookie-modal.show {
             display: flex;
         }
+        .cookie-content {
+            background: rgba(30, 41, 59, 0.95);
+            color: #e2e8f0;
+            padding: 32px;
+            border-radius: 24px;
+            max-width: 420px;
+            width: 90%;
+            text-align: left;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .cookie-content h3 {
+            margin-top: 0;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        .cookie-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 16px 0;
+        }
+        .cookie-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 24px;
+        }
         .cookie-btn {
+            padding: 12px 28px;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .cookie-accept {
             background: #3b82f6;
             color: white;
             border: none;
-            padding: 10px 24px;
-            border-radius: 999px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
         }
-        .cookie-btn.decline {
+        .cookie-accept:hover {
+            background: #2563eb;
+        }
+        .cookie-decline {
             background: transparent;
+            color: #94a3b8;
             border: 1px solid #64748b;
         }
-        .cookie-btn:hover {
-            opacity: 0.9;
+        .cookie-decline:hover {
+            background: rgba(51, 65, 85, 0.5);
         }
-
-        footer {
-            margin-top: 80px;
-            font-size: 0.9rem;
+        .close-cookie {
+            position: absolute;
+            top: 16px;
+            right: 24px;
+            font-size: 1.8rem;
+            cursor: pointer;
             opacity: 0.7;
-            z-index: 2;
+        }
+        .close-cookie:hover {
+            opacity: 1;
         }
 
         @media (max-width: 480px) {
             .profile-img { width: 120px; height: 120px; }
             .username { font-size: 1.8rem; }
             .link-btn { padding: 18px; font-size: 1.1rem; }
-            .loader-blob { width: 160px; height: 160px; }
-            .loader-blob::before { width: 100px; height: 100px; }
-            .watermark { font-size: 0.8rem; bottom: 80px; }
-            .cookie-consent { flex-direction: column; }
+            .copyright { font-size: 0.85rem; bottom: 20px; }
+            .cookie-content { padding: 24px; }
         }
     </style>
 </head>
@@ -254,7 +283,7 @@
 
     <div class="container">
         <!-- GANTI DENGAN FOTO PROFIL KAMU -->
-        <img src="https://media.istockphoto.com/id/1448738634/photo/portrait-of-a-gamer-wearing-headphones-and-playing-online-game-on-personal-computer.jpg?s=612x612&w=0&k=20&c=CI3YD8muH24PqgsZKjreO2vBharqbfuECxHGk9o5o4o=" alt="Profil" class="profile-img">
+        <img src="https://img.freepik.com/free-photo/scene-professional-esports-gamer-profile-colored-with-red-blue-light-generative-ai_191095-1968.jpg" alt="Profil" class="profile-img">
 
         <div class="username">
             @nama_kamu
@@ -280,23 +309,23 @@
             <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
-
-        <footer>
-            © 2025 @nama_kamu
-        </footer>
     </div>
 
-    <!-- Tanda Air -->
-    <div class="watermark">
-        Dibuat dengan ❤️ oleh @nama_kamu
+    <!-- Copyright Fixed seperti Footer -->
+    <div class="copyright">
+        Dibuat dengan ❤️ oleh @nama_kamu © 2025
     </div>
 
-    <!-- Real Cookies Consent Banner -->
-    <div class="cookie-consent" id="cookieConsent">
-        <span>Kami menggunakan cookies untuk meningkatkan pengalaman & analisis situs. Dengan melanjutkan, Anda menyetujui penggunaan cookies.</span>
-        <div>
-            <button class="cookie-btn decline" id="declineCookies">Decline</button>
-            <button class="cookie-btn" id="acceptCookies">Accept</button>
+    <!-- Professional Centered Cookies Modal -->
+    <div class="cookie-modal" id="cookieModal">
+        <div class="cookie-content">
+            <span class="close-cookie" id="closeCookie">&times;</span>
+            <h3>Cookies Consent</h3>
+            <p>Kami menggunakan cookies untuk meningkatkan pengalaman pengguna, analisis trafik, dan personalisasi konten. Dengan melanjutkan, Anda menyetujui penggunaan cookies sesuai kebijakan privasi kami.</p>
+            <div class="cookie-buttons">
+                <button class="cookie-btn cookie-decline" id="declineCookies">Decline</button>
+                <button class="cookie-btn cookie-accept" id="acceptCookies">Accept</button>
+            </div>
         </div>
     </div>
 
@@ -309,31 +338,45 @@
             }, 3200);
         });
 
-        // Real Cookies Consent (berfungsi nyata)
-        const cookieConsent = document.getElementById('cookieConsent');
+        // Real Cookies Consent Modal
+        const cookieModal = document.getElementById('cookieModal');
         const acceptBtn = document.getElementById('acceptCookies');
         const declineBtn = document.getElementById('declineCookies');
+        const closeBtn = document.getElementById('closeCookie');
 
-        // Cek apakah sudah ada consent
         if (!localStorage.getItem('cookieConsent')) {
-            cookieConsent.classList.add('show');
+            cookieModal.classList.add('show');
         }
 
-        // Fungsi set cookie dummy jika accept (contoh analytics)
+        function hideModal() {
+            cookieModal.classList.remove('show');
+        }
+
         function setAnalyticsCookie() {
             document.cookie = "analytics_consent=true; max-age=31536000; path=/; SameSite=Lax";
-            // Di sini bisa tambah script GA/analisis jika ada
         }
 
         acceptBtn.addEventListener('click', () => {
             localStorage.setItem('cookieConsent', 'accepted');
             setAnalyticsCookie();
-            cookieConsent.classList.remove('show');
+            hideModal();
         });
 
         declineBtn.addEventListener('click', () => {
             localStorage.setItem('cookieConsent', 'declined');
-            cookieConsent.classList.remove('show');
+            hideModal();
+        });
+
+        closeBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'declined');
+            hideModal();
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === cookieModal) {
+                localStorage.setItem('cookieConsent', 'declined');
+                hideModal();
+            }
         });
 
         // Proteksi inspeksi
