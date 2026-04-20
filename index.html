@@ -17,10 +17,10 @@
             background: white;
             box-shadow: 0 25px 50px -12px rgb(15 23 42 / 0.15);
             margin: 30px auto;
-            padding: 20mm 25mm;
+            padding: 18mm 20mm;
             font-family: 'Inter', system-ui, sans-serif;
             font-size: 11.8pt;
-            line-height: 1.75;
+            line-height: 1.65;
             color: #1f2937;
             position: relative;
             box-sizing: border-box;
@@ -29,48 +29,45 @@
         @media print {
             .no-print { display: none !important; }
             body { background: white !important; margin: 0; padding: 0; }
+            .preview-wrapper { box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
             .a4-paper {
                 width: 210mm !important;
+                height: auto !important;
                 min-height: 297mm !important;
                 margin: 0 !important;
-                padding: 20mm 25mm !important;
+                padding: 18mm 20mm !important;
                 box-shadow: none !important;
             }
             @page { size: A4 portrait; margin: 0; }
+            *, p, div, span, .data-diri, .isi-surat {
+                overflow: visible !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
         }
 
-        .tanggal { text-align: right; margin-bottom: 30px; }
-        .alamat-tujuan { margin-bottom: 35px; line-height: 1.6; }
-        .isi-surat { 
-            text-align: justify; 
-            padding-bottom: 140px; /* Memberi ruang ekstra untuk tanda tangan */
-        }
+        .tanggal { text-align: right; margin-bottom: 10px; }
+        .perihal { margin-bottom: 28px; line-height: 1.65; }
+        .alamat-tujuan { margin-bottom: 28px; }
+        .isi-surat { text-align: justify; }
 
         .data-diri {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 18px 0 28px 0;
+            display: grid;
+            grid-template-columns: 140px auto;
+            gap: 5px 15px;
+            line-height: 1.68;
+            margin: 16px 0 22px 0;
         }
-        .data-diri td {
-            padding: 6px 0;
-            vertical-align: top;
-        }
-        .data-diri .label {
+        .data-diri span.label {
+            text-align: left;
             font-weight: 500;
-            width: 175px;
+            white-space: nowrap;
         }
 
-        .tanda-tangan {
-            position: absolute;
-            bottom: 40mm;
-            right: 25mm;
-            text-align: center;
-            width: 220px;
-        }
-        .garis-tanda-tangan {
-            border-top: 2px solid #1f2937;
-            width: 160px;
-            margin: 8px auto 12px auto;
+        /* Posisi tanda tangan di pojok kanan bawah */
+        .ttd-container {
+            margin-top: 50px;
+            text-align: right;
         }
     </style>
 </head>
@@ -80,10 +77,10 @@
     <nav class="bg-slate-950 text-white sticky top-0 z-50 no-print shadow-md">
         <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-x-3">
-                <i class="fa-solid fa-envelope text-3xl text-blue-400"></i>
+                <i class="fa-solid fa-envelope text-3xl text-red-400"></i>
                 <div>
                     <h1 class="text-2xl font-semibold tracking-tight">SURAT IZIN TIDAK MASUK SEKOLAH</h1>
-                    <p class="text-xs text-slate-400 -mt-0.5">Format Resmi • Ada Ruang Tanda Tangan</p>
+                    <p class="text-xs text-slate-400 -mt-0.5">Format Standar Sekolah Indonesia • Compact</p>
                 </div>
             </div>
             
@@ -114,70 +111,81 @@
             <div class="lg:col-span-5 bg-white rounded-3xl shadow-xl p-8 no-print overflow-auto max-h-screen">
                 <div class="mb-8">
                     <h2 class="text-2xl font-semibold text-slate-800">Surat Izin Tidak Masuk Sekolah</h2>
-                    <p class="text-blue-600 text-sm mt-1">Format Resmi dengan Ruang Tanda Tangan</p>
+                    <p class="text-red-600 text-sm mt-1">Format Standar Sekolah Indonesia</p>
                 </div>
                 
                 <div class="space-y-8">
                     <div>
-                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-4">Data Orang Tua / Wali</h3>
-                        <input id="nama_ortu" type="text" value="Budi Santoso" placeholder="Nama Orang Tua / Wali" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none mb-4" oninput="updatePreview()">
-                        <input id="hubungan" type="text" value="Ayah" placeholder="Hubungan (Ayah/Ibu/Wali)" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none mb-4" oninput="updatePreview()">
-                        <input id="alamat_ortu" type="text" value="Paninggaran, Pekalongan, Jawa Tengah" placeholder="Alamat Lengkap Orang Tua" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none mb-4" oninput="updatePreview()">
-                        <div class="grid grid-cols-2 gap-4">
-                            <input id="telepon" type="tel" value="0856-1234-5678" placeholder="No. Telepon" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none" oninput="updatePreview()">
-                            <input id="email" type="email" value="budi@example.com" placeholder="Email (opsional)" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none" oninput="updatePreview()">
-                        </div>
-                    </div>
-
-                    <div>
                         <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-4">Data Siswa</h3>
-                        <input id="nama_siswa" type="text" value="Muhammad Hafis" placeholder="Nama Lengkap Siswa" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none mb-4" oninput="updatePreview()">
+                        <input id="nama" type="text" value="Muhammad Hafis" placeholder="Nama Lengkap Siswa" 
+                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mb-4" oninput="updatePreview()">
+                        
+                        <input id="kelas" type="text" value="XI TKJ 2" placeholder="Kelas" 
+                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mb-4" oninput="updatePreview()">
+
+                        <input id="sekolah" type="text" value="SMK Nurul Ummah Paninggaran" placeholder="Nama Sekolah" 
+                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mb-4" oninput="updatePreview()">
+
                         <div class="grid grid-cols-2 gap-4">
-                            <input id="kelas" type="text" value="XI IPA 2" placeholder="Kelas" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none" oninput="updatePreview()">
-                            <input id="sekolah" type="text" value="SMA Negeri 5 Pekalongan" placeholder="Nama Sekolah" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none" oninput="updatePreview()">
+                            <input id="tempat_lahir" type="text" value="Pekalongan" placeholder="Tempat Lahir" 
+                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
+                            <input id="tanggal_lahir" type="text" value="15 Mei 2005" placeholder="Tanggal Lahir" 
+                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
                         </div>
+
+                        <input id="alamat" type="text" value="Paninggaran, Pekalongan, Jawa Tengah" placeholder="Alamat Lengkap" 
+                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mt-4" oninput="updatePreview()">
+
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <input id="telepon" type="tel" value="0856-1234-5678" placeholder="No. Telepon Orang Tua" 
+                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
+                            <input id="email" type="email" value="hafis@example.com" placeholder="Email Orang Tua" 
+                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
+                        </div>
+
+                        <input id="nama_wali" type="text" value="Bapak Ahmad Fauzi" placeholder="Nama Orang Tua / Wali" 
+                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mt-4" oninput="updatePreview()">
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Tanggal Surat</h3>
-                            <input id="tanggal" type="text" value="Pekalongan, 20 April 2026" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none" oninput="updatePreview()">
+                            <input id="tanggal" type="text" value="Jakarta, 20 April 2026" 
+                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
                         </div>
                         <div>
                             <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Tanggal Izin</h3>
-                            <input id="tanggal_tidak_masuk" type="text" value="21 April 2026" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none" oninput="updatePreview()">
+                            <input id="tanggal_izin" type="text" value="21 April 2026" 
+                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
                         </div>
                     </div>
 
                     <div>
                         <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-4">Alamat Tujuan</h3>
-                        <textarea id="alamat_tujuan" rows="4" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none" 
-                                  oninput="updatePreview()">Yth. Bapak/Ibu Wali Kelas XI IPA 2
-SMA Negeri 5 Pekalongan
-Jl. Veteran No. 10
-Pekalongan, Jawa Tengah</textarea>
+                        <textarea id="alamat_perusahaan" rows="4" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" 
+                                  oninput="updatePreview()">Yth. Wali Kelas XI TKJ 2
+SMK Nurul Ummah Paninggaran
+Paninggaran, Pekalongan, Jawa Tengah</textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Perihal</h3>
+                            <input id="perihal" type="text" value="Izin Tidak Masuk Sekolah" 
+                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
+                        </div>
+                        <div>
+                            <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Alasan (opsional)</h3>
+                            <textarea id="alasan" rows="3" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" 
+                                      oninput="updatePreview()">Sakit demam dan flu</textarea>
+                        </div>
                     </div>
 
                     <div>
-                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Alasan Izin</h3>
-                        <textarea id="alasan" rows="3" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none" 
-                                  oninput="updatePreview()">Sakit demam dan batuk</textarea>
-                    </div>
-
-                    <div>
-                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Lampiran (opsional)</h3>
-                        <textarea id="lampiran" rows="2" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-blue-500 outline-none" 
-                                  oninput="updatePreview()">1. Surat keterangan dokter (jika ada)</textarea>
+                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Lampiran (tidak akan muncul di surat)</h3>
+                        <textarea id="lampiran" rows="3" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" 
+                                  oninput="updatePreview()">1. Surat keterangan dokter (jika sakit)
+2. Bukti lainnya (jika ada)</textarea>
                     </div>
                 </div>
             </div>
@@ -188,7 +196,7 @@ Pekalongan, Jawa Tengah</textarea>
                     <h3 class="font-semibold text-slate-700 flex items-center gap-x-2">
                         <i class="fa-solid fa-eye"></i> Pratinjau Surat Izin Tidak Masuk Sekolah
                     </h3>
-                    <span class="text-xs bg-blue-100 text-blue-700 px-4 py-1.5 rounded-3xl">FORMAT A4</span>
+                    <span class="text-xs bg-red-100 text-red-700 px-4 py-1.5 rounded-3xl">FORMAT A4</span>
                 </div>
                 
                 <div class="preview-wrapper bg-white p-6 rounded-3xl shadow-inner overflow-x-auto">
@@ -202,61 +210,64 @@ Pekalongan, Jawa Tengah</textarea>
 
     <script>
         function updatePreview() {
-            const nama_ortu = document.getElementById('nama_ortu').value || "Budi Santoso";
-            const hubungan = document.getElementById('hubungan').value || "Ayah";
-            const alamat_ortu = document.getElementById('alamat_ortu').value || "Paninggaran, Pekalongan, Jawa Tengah";
+            const nama = document.getElementById('nama').value || "Muhammad Hafis";
+            const kelas = document.getElementById('kelas').value || "XI TKJ 2";
+            const sekolah = document.getElementById('sekolah').value || "SMK Nurul Ummah Paninggaran";
+            const tempat_lahir = document.getElementById('tempat_lahir').value || "Pekalongan";
+            const tanggal_lahir = document.getElementById('tanggal_lahir').value || "15 Mei 2005";
+            const alamat = document.getElementById('alamat').value || "Paninggaran, Pekalongan, Jawa Tengah";
             const telepon = document.getElementById('telepon').value || "0856-1234-5678";
-            const email = document.getElementById('email').value || "";
-            const nama_siswa = document.getElementById('nama_siswa').value || "Muhammad Hafis";
-            const kelas = document.getElementById('kelas').value || "XI IPA 2";
-            const sekolah = document.getElementById('sekolah').value || "SMA Negeri 5 Pekalongan";
-            const tanggal = document.getElementById('tanggal').value || "Pekalongan, 20 April 2026";
-            const tanggal_tidak_masuk = document.getElementById('tanggal_tidak_masuk').value || "21 April 2026";
-            const alamat_tujuan = document.getElementById('alamat_tujuan').value;
+            const nama_wali = document.getElementById('nama_wali').value || "Bapak Ahmad Fauzi";
+            const tanggal = document.getElementById('tanggal').value || "Jakarta, 20 April 2026";
+            const tanggal_izin = document.getElementById('tanggal_izin').value || "21 April 2026";
+            const alamat_perusahaan = document.getElementById('alamat_perusahaan').value;
+            const perihal = document.getElementById('perihal').value || "Izin Tidak Masuk Sekolah";
             const alasan = document.getElementById('alasan').value.trim();
-            const lampiranText = document.getElementById('lampiran').value.replace(/\n/g, '<br>') || '-';
+
+            let alasanText = alasan ? `<p>Alasan siswa tidak masuk sekolah adalah karena ${alasan}.</p>` : '';
+
+            let dataDiriHTML = `
+                <div class="data-diri">
+                    <span class="label">Nama Siswa</span> <span>: ${nama}</span>
+                    <span class="label">Kelas</span> <span>: ${kelas}</span>
+                    <span class="label">Tempat/Tgl. Lahir</span> <span>: ${tempat_lahir}, ${tanggal_lahir}</span>
+                    <span class="label">Alamat</span> <span>: ${alamat}</span>
+                    <span class="label">Nama Orang Tua/Wali</span> <span>: ${nama_wali}</span>
+                    <span class="label">No. Telepon</span> <span>: ${telepon}</span>
+                </div>`;
 
             const contentHTML = `
                 <div class="tanggal">
                     <p>${tanggal}</p>
                 </div>
 
-                <div class="alamat-tujuan">
-                    <p class="whitespace-pre-line">${alamat_tujuan || 'Yth. Bapak/Ibu Wali Kelas XI IPA 2<br>SMA Negeri 5 Pekalongan<br>Jl. Veteran No. 10<br>Pekalongan, Jawa Tengah'}</p>
+                <div class="perihal">
+                    <p>Perihal : ${perihal}</p>
                 </div>
 
-                <div class="mb-6">
+                <div class="alamat-tujuan">
+                    <p class="whitespace-pre-line">${alamat_perusahaan || 'Yth. Wali Kelas XI TKJ 2<br>SMK Nurul Ummah Paninggaran<br>Paninggaran, Pekalongan, Jawa Tengah'}</p>
+                </div>
+
+                <div class="mb-8">
                     <p><strong>Dengan hormat,</strong></p>
                 </div>
 
-                <div class="isi-surat leading-relaxed space-y-6">
+                <div class="isi-surat leading-relaxed space-y-5">
                     <p>Yang bertanda tangan di bawah ini:</p>
-                    
-                    <table class="data-diri">
-                        <tr><td class="label">Nama Orang Tua / Wali</td><td>: ${nama_ortu} (${hubungan})</td></tr>
-                        <tr><td class="label">Nama Siswa</td><td>: ${nama_siswa}</td></tr>
-                        <tr><td class="label">Kelas</td><td>: ${kelas}</td></tr>
-                        <tr><td class="label">Sekolah</td><td>: ${sekolah}</td></tr>
-                        <tr><td class="label">Alamat</td><td>: ${alamat_ortu}</td></tr>
-                    </table>
-
-                    <p>Bersama surat ini kami mohon izin bahwa anak kami tidak dapat mengikuti kegiatan belajar mengajar pada tanggal <strong>${tanggal_tidak_masuk}</strong> karena ${alasan || 'alasan tertentu'}.</p>
-                    
-                    <p>Kami siap bertanggung jawab dan membantu anak kami mengejar pelajaran yang tertinggal. Demikian surat izin ini kami buat dengan sebenar-benarnya. Atas perhatian dan izin Bapak/Ibu, kami ucapkan terima kasih.</p>
+                    ${dataDiriHTML}
+                    <p>Dengan ini kami mengajukan izin tidak masuk sekolah bagi anak kami pada tanggal <strong>${tanggal_izin}</strong> karena ${alasan || 'alasan kesehatan'}.</p>
+                    ${alasanText}
+                    <p>Kami mohon maaf atas ketidaknyamanan yang ditimbulkan dan berjanji akan membantu siswa untuk mengejar pelajaran yang tertinggal. Siswa siap mengikuti prosedur sekolah terkait izin absen.</p>
+                    <p>Demikian surat izin ini kami buat dengan sebenar-benarnya. Atas perhatian dan pengertian Bapak/Ibu, kami ucapkan terima kasih.</p>
                 </div>
 
-                <!-- Bagian Tanda Tangan dengan Ruang Khusus -->
-                <div class="tanda-tangan">
-                    <p class="mb-6">Hormat kami,</p>
-                    
-                    <!-- Ruang untuk tanda tangan (kosong saat dicetak) -->
-                    <div class="h-16 flex items-end justify-center">
-                        <div class="garis-tanda-tangan"></div>
+                <!-- Tanda Tangan di Pojok Kanan Bawah -->
+                <div class="ttd-container mt-20">
+                    <p>Hormat kami,</p>
+                    <div class="mt-16">
+                        <p class="font-semibold">${nama_wali}</p>
                     </div>
-                    
-                    <p class="font-semibold">${nama_ortu}</p>
-                    <p class="text-sm text-slate-600 mt-1">(${hubungan} dari ${nama_siswa})</p>
-                    <p class="text-sm text-slate-600 mt-6">${telepon} ${email ? '| ' + email : ''}</p>
                 </div>
             `;
 
@@ -269,7 +280,7 @@ Pekalongan, Jawa Tengah</textarea>
         }
 
         function generatePDF() {
-            if (confirm('Simpan sebagai PDF?\n\n• Centang "Background graphics"\n• Margin = None\n• Scale = 100%')) {
+            if (confirm('Simpan sebagai PDF?\n\nPENTING:\n• Margins = None\n• Centang Background graphics\n• Scale = 100%')) {
                 printLetter();
             }
         }
@@ -280,10 +291,11 @@ Pekalongan, Jawa Tengah</textarea>
             html2canvas(surat, { 
                 scale: 3, 
                 backgroundColor: '#ffffff',
-                useCORS: true 
+                useCORS: true,
+                height: surat.scrollHeight + 20
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = `Surat_Izin_Tidak_Masuk_${document.getElementById('nama_siswa').value.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
+                link.download = `Surat_Izin_Tidak_Masuk_Sekolah_${document.getElementById('nama').value.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
@@ -291,22 +303,24 @@ Pekalongan, Jawa Tengah</textarea>
 
         function autoSaveDraft() {
             const data = {
-                nama_ortu: document.getElementById('nama_ortu').value,
-                hubungan: document.getElementById('hubungan').value,
-                alamat_ortu: document.getElementById('alamat_ortu').value,
-                telepon: document.getElementById('telepon').value,
-                email: document.getElementById('email').value,
-                nama_siswa: document.getElementById('nama_siswa').value,
+                nama: document.getElementById('nama').value,
                 kelas: document.getElementById('kelas').value,
                 sekolah: document.getElementById('sekolah').value,
+                tempat_lahir: document.getElementById('tempat_lahir').value,
+                tanggal_lahir: document.getElementById('tanggal_lahir').value,
+                alamat: document.getElementById('alamat').value,
+                telepon: document.getElementById('telepon').value,
+                email: document.getElementById('email').value,
+                nama_wali: document.getElementById('nama_wali').value,
                 tanggal: document.getElementById('tanggal').value,
-                tanggal_tidak_masuk: document.getElementById('tanggal_tidak_masuk').value,
-                alamat_tujuan: document.getElementById('alamat_tujuan').value,
+                tanggal_izin: document.getElementById('tanggal_izin').value,
+                alamat_perusahaan: document.getElementById('alamat_perusahaan').value,
+                perihal: document.getElementById('perihal').value,
                 alasan: document.getElementById('alasan').value,
                 lampiran: document.getElementById('lampiran').value
             };
-            localStorage.setItem('suratIzinSekolah_v3', JSON.stringify(data));
-            alert('Draft surat izin berhasil disimpan!');
+            localStorage.setItem('suratIzinTidakMasukSekolah_v2', JSON.stringify(data));
+            alert('Draft surat izin tidak masuk sekolah berhasil disimpan!');
         }
 
         function clearForm() {
