@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Izin Tidak Masuk Sekolah</title>
+    <title>ATS - CV Tanpa Foto</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -17,10 +17,10 @@
             background: white;
             box-shadow: 0 25px 50px -12px rgb(15 23 42 / 0.15);
             margin: 30px auto;
-            padding: 18mm 20mm;
+            padding: 15mm 16mm;
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: 11.8pt;
-            line-height: 1.65;
+            font-size: 11pt;
+            line-height: 1.72;
             color: #1f2937;
             position: relative;
             box-sizing: border-box;
@@ -29,45 +29,33 @@
         @media print {
             .no-print { display: none !important; }
             body { background: white !important; margin: 0; padding: 0; }
-            .preview-wrapper { box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
-            .a4-paper {
-                width: 210mm !important;
-                height: auto !important;
-                min-height: 297mm !important;
+            .preview-wrapper {
+                display: block !important;
+                background: white !important;
+                padding: 0 !important;
                 margin: 0 !important;
-                padding: 18mm 20mm !important;
                 box-shadow: none !important;
             }
-            @page { size: A4 portrait; margin: 0; }
-            *, p, div, span, .data-diri, .isi-surat {
-                overflow: visible !important;
-                break-inside: avoid !important;
-                page-break-inside: avoid !important;
+            .a4-paper {
+                width: 210mm !important;
+                min-height: 297mm !important;
+                margin: 0 auto !important;
+                padding: 15mm 16mm !important;
+                box-shadow: none !important;
+                page-break-after: always;
             }
+            .section-title { page-break-inside: avoid; }
         }
 
-        .tanggal { text-align: right; margin-bottom: 10px; }
-        .perihal { margin-bottom: 28px; line-height: 1.65; }
-        .alamat-tujuan { margin-bottom: 28px; }
-        .isi-surat { text-align: justify; }
+        @page { size: A4 portrait; margin: 0; }
 
-        .data-diri {
-            display: grid;
-            grid-template-columns: 140px auto;
-            gap: 5px 15px;
-            line-height: 1.68;
-            margin: 16px 0 22px 0;
-        }
-        .data-diri span.label {
-            text-align: left;
-            font-weight: 500;
-            white-space: nowrap;
-        }
-
-        /* Posisi tanda tangan di pojok kanan bawah */
-        .ttd-container {
-            margin-top: 50px;
-            text-align: right;
+        .section-title {
+            font-size: 13.5pt;
+            font-weight: 700;
+            color: #1e2937;
+            margin-bottom: 9px;
+            padding-bottom: 6px;
+            border-bottom: 2.5px solid #1e2937;
         }
     </style>
 </head>
@@ -77,10 +65,10 @@
     <nav class="bg-slate-950 text-white sticky top-0 z-50 no-print shadow-md">
         <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-x-3">
-                <i class="fa-solid fa-envelope text-3xl text-red-400"></i>
+                <i class="fa-solid fa-file-lines text-3xl text-emerald-400"></i>
                 <div>
-                    <h1 class="text-2xl font-semibold tracking-tight">SURAT IZIN TIDAK MASUK SEKOLAH</h1>
-                    <p class="text-xs text-slate-400 -mt-0.5">Format Standar Sekolah Indonesia • Compact</p>
+                    <h1 class="text-2xl font-semibold tracking-tight">ATS SYSTEM</h1>
+                    <p class="text-xs text-slate-400 -mt-0.5">V.5.6 - Tanpa Foto</p>
                 </div>
             </div>
             
@@ -92,7 +80,7 @@
                     <i class="fa-solid fa-image"></i> <span class="hidden sm:inline">PNG</span>
                 </button>
                 <button onclick="generatePDF()" class="flex items-center gap-x-2 px-6 h-10 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-medium">
-                    <i class="fa-solid fa-file-pdf"></i> <span>PDF Surat</span>
+                    <i class="fa-solid fa-file-pdf"></i> <span>PDF ATS</span>
                 </button>
                 <button onclick="printLetter()" class="flex items-center gap-x-2 px-6 h-10 bg-white text-slate-950 hover:bg-slate-100 rounded-2xl font-medium">
                     <i class="fa-solid fa-print"></i> <span>Cetak</span>
@@ -110,82 +98,81 @@
             <!-- FORM INPUT -->
             <div class="lg:col-span-5 bg-white rounded-3xl shadow-xl p-8 no-print overflow-auto max-h-screen">
                 <div class="mb-8">
-                    <h2 class="text-2xl font-semibold text-slate-800">Surat Izin Tidak Masuk Sekolah</h2>
-                    <p class="text-red-600 text-sm mt-1">Format Standar Sekolah Indonesia</p>
+                    <h2 class="text-2xl font-semibold text-slate-800">CV ATS Profesional v5.6</h2>
+                    <p class="text-emerald-600 text-sm mt-1">Versi Tanpa Foto</p>
                 </div>
                 
-                <div class="space-y-8">
+                <div class="space-y-10">
+                    <!-- Data Diri -->
                     <div>
-                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-4">Data Siswa</h3>
-                        <input id="nama" type="text" value="Muhammad Hafis" placeholder="Nama Lengkap Siswa" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mb-4" oninput="updatePreview()">
+                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-4">Data Diri</h3>
+                        <input id="nama" type="text" value="Muhammad Hafis" placeholder="Nama Lengkap" 
+                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none mb-4" oninput="updatePreview()">
                         
-                        <input id="kelas" type="text" value="XI TKJ 2" placeholder="Kelas" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mb-4" oninput="updatePreview()">
-
-                        <input id="sekolah" type="text" value="SMK Nurul Ummah Paninggaran" placeholder="Nama Sekolah" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mb-4" oninput="updatePreview()">
-
                         <div class="grid grid-cols-2 gap-4">
-                            <input id="tempat_lahir" type="text" value="Pekalongan" placeholder="Tempat Lahir" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
-                            <input id="tanggal_lahir" type="text" value="15 Mei 2005" placeholder="Tanggal Lahir" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
+                            <input id="telepon" type="tel" value="0856-1234-5678" placeholder="No. Telepon" 
+                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
+                            <input id="email" type="email" value="hafis@example.com" placeholder="Email" 
+                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
                         </div>
-
-                        <input id="alamat" type="text" value="Paninggaran, Pekalongan, Jawa Tengah" placeholder="Alamat Lengkap" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mt-4" oninput="updatePreview()">
-
-                        <div class="grid grid-cols-2 gap-4 mt-4">
-                            <input id="telepon" type="tel" value="0856-1234-5678" placeholder="No. Telepon Orang Tua" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
-                            <input id="email" type="email" value="hafis@example.com" placeholder="Email Orang Tua" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
-                        </div>
-
-                        <input id="nama_wali" type="text" value="Bapak Ahmad Fauzi" placeholder="Nama Orang Tua / Wali" 
-                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none mt-4" oninput="updatePreview()">
+                        <input id="alamat" type="text" value="Paninggaran, Pekalongan, Jawa Tengah" placeholder="Domisili / Alamat" 
+                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none mt-4" oninput="updatePreview()">
+                        <input id="linkedin" type="text" value="linkedin.com/in/hafis" placeholder="LinkedIn / GitHub" 
+                               class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none mt-3" oninput="updatePreview()">
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Tanggal Surat</h3>
-                            <input id="tanggal" type="text" value="Jakarta, 20 April 2026" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
-                        </div>
-                        <div>
-                            <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Tanggal Izin</h3>
-                            <input id="tanggal_izin" type="text" value="21 April 2026" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
-                        </div>
-                    </div>
-
+                    <!-- Ringkasan Profesional -->
                     <div>
-                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-4">Alamat Tujuan</h3>
-                        <textarea id="alamat_perusahaan" rows="4" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" 
-                                  oninput="updatePreview()">Yth. Wali Kelas XI TKJ 2
-SMK Nurul Ummah Paninggaran
-Paninggaran, Pekalongan, Jawa Tengah</textarea>
+                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-4">Ringkasan Profesional</h3>
+                        <textarea id="ringkasan" rows="4" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" 
+                                  oninput="updatePreview()">Fresh Graduate Teknik Jaringan Komputer dan Telekomunikasi yang kompeten di bidang IT Support, administrasi jaringan, dan troubleshooting.</textarea>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Perihal</h3>
-                            <input id="perihal" type="text" value="Izin Tidak Masuk Sekolah" 
-                                   class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" oninput="updatePreview()">
-                        </div>
-                        <div>
-                            <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Alasan (opsional)</h3>
-                            <textarea id="alasan" rows="3" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" 
-                                      oninput="updatePreview()">Sakit demam dan flu</textarea>
-                        </div>
-                    </div>
-
+                    <!-- Pengalaman Kerja -->
                     <div>
-                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-2">Lampiran (tidak akan muncul di surat)</h3>
-                        <textarea id="lampiran" rows="3" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-red-500 outline-none" 
-                                  oninput="updatePreview()">1. Surat keterangan dokter (jika sakit)
-2. Bukti lainnya (jika ada)</textarea>
+                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-3">Pengalaman Kerja</h3>
+                        <div id="pengalaman-container" class="space-y-4"></div>
+                        <button onclick="tambahPengalaman()" class="mt-3 flex items-center gap-2 text-emerald-600 hover:text-emerald-700 text-sm font-medium">
+                            <i class="fa-solid fa-plus"></i> Tambah Pengalaman Kerja
+                        </button>
+                    </div>
+
+                    <!-- Pengalaman Magang -->
+                    <div>
+                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-3">Pengalaman Magang</h3>
+                        <div id="magang-container" class="space-y-4"></div>
+                        <button onclick="tambahMagang()" class="mt-3 flex items-center gap-2 text-emerald-600 hover:text-emerald-700 text-sm font-medium">
+                            <i class="fa-solid fa-plus"></i> Tambah Pengalaman Magang
+                        </button>
+                    </div>
+
+                    <!-- Pendidikan -->
+                    <div>
+                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-3">Pendidikan</h3>
+                        <div id="pendidikan-container" class="space-y-4"></div>
+                        <button onclick="tambahPendidikan()" class="mt-3 flex items-center gap-2 text-emerald-600 hover:text-emerald-700 text-sm font-medium">
+                            <i class="fa-solid fa-plus"></i> Tambah Pendidikan
+                        </button>
+                    </div>
+
+                    <!-- Keterampilan -->
+                    <div>
+                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-4">Keterampilan</h3>
+                        <textarea id="keterampilan" rows="6" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" 
+                                  oninput="updatePreview()">• Microsoft Office (Word, Excel, PowerPoint)
+• Administrasi dan Konfigurasi Jaringan Komputer
+• HTML, CSS, Tailwind CSS, JavaScript Dasar
+• Troubleshooting Hardware & Software
+• Instalasi Perangkat Jaringan
+• Bahasa Inggris (Pasif-Aktif)</textarea>
+                    </div>
+
+                    <!-- Sertifikasi & Proyek -->
+                    <div>
+                        <h3 class="uppercase text-xs tracking-widest font-medium text-slate-500 mb-4">Sertifikasi & Proyek</h3>
+                        <textarea id="sertifikasi" rows="4" class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" 
+                                  oninput="updatePreview()">• Sertifikat Cisco Networking Academy
+• Proyek: Sistem Monitoring Jaringan Sekolah berbasis Web</textarea>
                     </div>
                 </div>
             </div>
@@ -194,14 +181,14 @@ Paninggaran, Pekalongan, Jawa Tengah</textarea>
             <div class="lg:col-span-7">
                 <div class="preview-header flex justify-between items-center mb-4 px-2 no-print">
                     <h3 class="font-semibold text-slate-700 flex items-center gap-x-2">
-                        <i class="fa-solid fa-eye"></i> Pratinjau Surat Izin Tidak Masuk Sekolah
+                        <i class="fa-solid fa-eye"></i> Pratinjau CV ATS (Tanpa Foto)
                     </h3>
-                    <span class="text-xs bg-red-100 text-red-700 px-4 py-1.5 rounded-3xl">FORMAT A4</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-3xl">FORMAT A4</span>
                 </div>
                 
                 <div class="preview-wrapper bg-white p-6 rounded-3xl shadow-inner overflow-x-auto">
-                    <div id="surat" class="a4-paper mx-auto">
-                        <div id="surat-content"></div>
+                    <div id="cv" class="a4-paper mx-auto">
+                        <div id="cv-content"></div>
                     </div>
                 </div>
             </div>
@@ -209,69 +196,140 @@ Paninggaran, Pekalongan, Jawa Tengah</textarea>
     </div>
 
     <script>
+        let cvData = {
+            nama: "Muhammad Hafis",
+            telepon: "0856-1234-5678",
+            email: "hafis@example.com",
+            alamat: "Paninggaran, Pekalongan, Jawa Tengah",
+            linkedin: "linkedin.com/in/hafis",
+            ringkasan: "",
+            keterampilan: "",
+            sertifikasi: ""
+        };
+
+        function tambahPengalaman() {
+            const container = document.getElementById('pengalaman-container');
+            const index = container.children.length;
+            const div = document.createElement('div');
+            div.className = "border border-slate-100 p-5 rounded-2xl space-y-3";
+            div.innerHTML = `
+                <input type="text" id="exp-posisi-${index}" placeholder="Posisi / Jabatan" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
+                <input type="text" id="exp-perusahaan-${index}" placeholder="Nama Perusahaan" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
+                <input type="text" id="exp-periode-${index}" placeholder="Periode" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
+                <textarea id="exp-deskripsi-${index}" rows="3" placeholder="Deskripsi tugas & pencapaian" 
+                          class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()"></textarea>
+            `;
+            container.appendChild(div);
+            updatePreview();
+        }
+
+        function tambahMagang() {
+            const container = document.getElementById('magang-container');
+            const index = container.children.length;
+            const div = document.createElement('div');
+            div.className = "border border-slate-100 p-5 rounded-2xl space-y-3";
+            div.innerHTML = `
+                <input type="text" id="mag-posisi-${index}" placeholder="Posisi Magang" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
+                <input type="text" id="mag-perusahaan-${index}" placeholder="Nama Perusahaan / Instansi" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
+                <input type="text" id="mag-periode-${index}" placeholder="Periode Magang" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
+                <textarea id="mag-deskripsi-${index}" rows="3" placeholder="Deskripsi tugas & pencapaian selama magang" 
+                          class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()"></textarea>
+            `;
+            container.appendChild(div);
+            updatePreview();
+        }
+
+        function tambahPendidikan() {
+            const container = document.getElementById('pendidikan-container');
+            const index = container.children.length;
+            const div = document.createElement('div');
+            div.className = "border border-slate-100 p-5 rounded-2xl space-y-3";
+            div.innerHTML = `
+                <input type="text" id="pend-nama-${index}" placeholder="Nama Sekolah / Universitas & Jurusan" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
+                <input type="text" id="pend-tahun-${index}" placeholder="Tahun (contoh: 2023 - 2026)" 
+                       class="w-full px-5 py-4 border border-slate-200 rounded-3xl focus:border-emerald-500 outline-none" oninput="updatePreview()">
+            `;
+            container.appendChild(div);
+            updatePreview();
+        }
+
         function updatePreview() {
-            const nama = document.getElementById('nama').value || "Muhammad Hafis";
-            const kelas = document.getElementById('kelas').value || "XI TKJ 2";
-            const sekolah = document.getElementById('sekolah').value || "SMK Nurul Ummah Paninggaran";
-            const tempat_lahir = document.getElementById('tempat_lahir').value || "Pekalongan";
-            const tanggal_lahir = document.getElementById('tanggal_lahir').value || "15 Mei 2005";
-            const alamat = document.getElementById('alamat').value || "Paninggaran, Pekalongan, Jawa Tengah";
-            const telepon = document.getElementById('telepon').value || "0856-1234-5678";
-            const nama_wali = document.getElementById('nama_wali').value || "Bapak Ahmad Fauzi";
-            const tanggal = document.getElementById('tanggal').value || "Jakarta, 20 April 2026";
-            const tanggal_izin = document.getElementById('tanggal_izin').value || "21 April 2026";
-            const alamat_perusahaan = document.getElementById('alamat_perusahaan').value;
-            const perihal = document.getElementById('perihal').value || "Izin Tidak Masuk Sekolah";
-            const alasan = document.getElementById('alasan').value.trim();
+            cvData.nama = document.getElementById('nama').value || "Nama Lengkap";
+            cvData.telepon = document.getElementById('telepon').value;
+            cvData.email = document.getElementById('email').value;
+            cvData.alamat = document.getElementById('alamat').value;
+            cvData.linkedin = document.getElementById('linkedin').value;
+            cvData.ringkasan = document.getElementById('ringkasan').value;
+            cvData.keterampilan = document.getElementById('keterampilan').value;
+            cvData.sertifikasi = document.getElementById('sertifikasi').value;
 
-            let alasanText = alasan ? `<p>Alasan siswa tidak masuk sekolah adalah karena ${alasan}.</p>` : '';
+            // Pengalaman Kerja
+            let expHTML = '';
+            const expContainer = document.getElementById('pengalaman-container');
+            Array.from(expContainer.children).forEach((child, i) => {
+                const posisi = child.querySelector(`#exp-posisi-${i}`)?.value.trim() || '';
+                const perusahaan = child.querySelector(`#exp-perusahaan-${i}`)?.value.trim() || '';
+                const periode = child.querySelector(`#exp-periode-${i}`)?.value.trim() || '';
+                const deskripsi = child.querySelector(`#exp-deskripsi-${i}`)?.value.trim() || '';
+                if (posisi || perusahaan) {
+                    expHTML += `<div class="mb-6"><p class="font-semibold">${posisi} ${perusahaan ? `— ${perusahaan}` : ''}</p><p class="text-slate-600 text-sm">${periode}</p><div class="text-slate-700 whitespace-pre-line leading-relaxed mt-2">${deskripsi.replace(/\n/g, '<br>')}</div></div>`;
+                }
+            });
 
-            let dataDiriHTML = `
-                <div class="data-diri">
-                    <span class="label">Nama Siswa</span> <span>: ${nama}</span>
-                    <span class="label">Kelas</span> <span>: ${kelas}</span>
-                    <span class="label">Tempat/Tgl. Lahir</span> <span>: ${tempat_lahir}, ${tanggal_lahir}</span>
-                    <span class="label">Alamat</span> <span>: ${alamat}</span>
-                    <span class="label">Nama Orang Tua/Wali</span> <span>: ${nama_wali}</span>
-                    <span class="label">No. Telepon</span> <span>: ${telepon}</span>
-                </div>`;
+            // Pengalaman Magang
+            let magangHTML = '';
+            const magangContainer = document.getElementById('magang-container');
+            Array.from(magangContainer.children).forEach((child, i) => {
+                const posisi = child.querySelector(`#mag-posisi-${i}`)?.value.trim() || '';
+                const perusahaan = child.querySelector(`#mag-perusahaan-${i}`)?.value.trim() || '';
+                const periode = child.querySelector(`#mag-periode-${i}`)?.value.trim() || '';
+                const deskripsi = child.querySelector(`#mag-deskripsi-${i}`)?.value.trim() || '';
+                if (posisi || perusahaan) {
+                    magangHTML += `<div class="mb-6"><p class="font-semibold">${posisi} ${perusahaan ? `— ${perusahaan}` : ''}</p><p class="text-slate-600 text-sm">${periode}</p><div class="text-slate-700 whitespace-pre-line leading-relaxed mt-2">${deskripsi.replace(/\n/g, '<br>')}</div></div>`;
+                }
+            });
+
+            // Pendidikan
+            let pendHTML = '';
+            const pendContainer = document.getElementById('pendidikan-container');
+            Array.from(pendContainer.children).forEach((child, i) => {
+                const nama = child.querySelector(`#pend-nama-${i}`)?.value.trim() || '';
+                const tahun = child.querySelector(`#pend-tahun-${i}`)?.value.trim() || '';
+                if (nama) pendHTML += `<div class="mb-5"><p class="font-semibold">${nama}</p><p class="text-slate-600">${tahun}</p></div>`;
+            });
 
             const contentHTML = `
-                <div class="tanggal">
-                    <p>${tanggal}</p>
-                </div>
-
-                <div class="perihal">
-                    <p>Perihal : ${perihal}</p>
-                </div>
-
-                <div class="alamat-tujuan">
-                    <p class="whitespace-pre-line">${alamat_perusahaan || 'Yth. Wali Kelas XI TKJ 2<br>SMK Nurul Ummah Paninggaran<br>Paninggaran, Pekalongan, Jawa Tengah'}</p>
-                </div>
-
-                <div class="mb-8">
-                    <p><strong>Dengan hormat,</strong></p>
-                </div>
-
-                <div class="isi-surat leading-relaxed space-y-5">
-                    <p>Yang bertanda tangan di bawah ini:</p>
-                    ${dataDiriHTML}
-                    <p>Dengan ini kami mengajukan izin tidak masuk sekolah bagi anak kami pada tanggal <strong>${tanggal_izin}</strong> karena ${alasan || 'alasan kesehatan'}.</p>
-                    ${alasanText}
-                    <p>Kami mohon maaf atas ketidaknyamanan yang ditimbulkan dan berjanji akan membantu siswa untuk mengejar pelajaran yang tertinggal. Siswa siap mengikuti prosedur sekolah terkait izin absen.</p>
-                    <p>Demikian surat izin ini kami buat dengan sebenar-benarnya. Atas perhatian dan pengertian Bapak/Ibu, kami ucapkan terima kasih.</p>
-                </div>
-
-                <!-- Tanda Tangan di Pojok Kanan Bawah -->
-                <div class="ttd-container mt-20">
-                    <p>Hormat kami,</p>
-                    <div class="mt-16">
-                        <p class="font-semibold">${nama_wali}</p>
+                <div>
+                    <h1 class="text-[28pt] font-bold tracking-tight text-slate-900">${cvData.nama}</h1>
+                    <div class="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-[10.6pt] text-slate-600">
+                        <span>${cvData.telepon}</span>
+                        <span>${cvData.email}</span>
+                        <span>${cvData.alamat}</span>
+                        ${cvData.linkedin ? `<span class="break-all">${cvData.linkedin}</span>` : ''}
                     </div>
                 </div>
+
+                ${cvData.ringkasan ? `<div class="mt-10"><h2 class="section-title">RINGKASAN PROFESIONAL</h2><p class="text-slate-700 leading-relaxed">${cvData.ringkasan}</p></div>` : ''}
+
+                ${expHTML ? `<div class="mt-10"><h2 class="section-title">PENGALAMAN KERJA</h2>${expHTML}</div>` : ''}
+
+                ${magangHTML ? `<div class="mt-10"><h2 class="section-title">PENGALAMAN MAGANG</h2>${magangHTML}</div>` : ''}
+
+                <div class="mt-10"><h2 class="section-title">PENDIDIKAN</h2><div class="mt-4">${pendHTML || '<p class="text-slate-500 italic">Tambahkan pendidikan Anda</p>'}</div></div>
+
+                <div class="mt-10"><h2 class="section-title">KETERAMPILAN</h2><div class="text-slate-700 whitespace-pre-line leading-relaxed mt-4">${cvData.keterampilan.replace(/\n/g, '<br>')}</div></div>
+
+                ${cvData.sertifikasi ? `<div class="mt-10"><h2 class="section-title">SERTIFIKASI & PROYEK</h2><div class="text-slate-700 whitespace-pre-line leading-relaxed mt-4">${cvData.sertifikasi.replace(/\n/g, '<br>')}</div></div>` : ''}
             `;
 
-            document.getElementById('surat-content').innerHTML = contentHTML;
+            document.getElementById('cv-content').innerHTML = contentHTML;
         }
 
         function printLetter() {
@@ -280,54 +338,44 @@ Paninggaran, Pekalongan, Jawa Tengah</textarea>
         }
 
         function generatePDF() {
-            if (confirm('Simpan sebagai PDF?\n\nPENTING:\n• Margins = None\n• Centang Background graphics\n• Scale = 100%')) {
+            if (confirm('Simpan sebagai PDF?\n\nTips:\n• Margins = None\n• Centang Background graphics')) {
                 printLetter();
             }
         }
 
         function saveAsImage() {
-            const surat = document.getElementById('surat');
-            updatePreview();
-            html2canvas(surat, { 
-                scale: 3, 
-                backgroundColor: '#ffffff',
-                useCORS: true,
-                height: surat.scrollHeight + 20
-            }).then(canvas => {
+            const cv = document.getElementById('cv');
+            html2canvas(cv, { scale: 3, backgroundColor: '#ffffff' }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = `Surat_Izin_Tidak_Masuk_Sekolah_${document.getElementById('nama').value.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
+                link.download = `CV_ATS_${cvData.nama.replace(/[^a-zA-Z0-9]/g, '_')}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
         }
 
         function autoSaveDraft() {
-            const data = {
-                nama: document.getElementById('nama').value,
-                kelas: document.getElementById('kelas').value,
-                sekolah: document.getElementById('sekolah').value,
-                tempat_lahir: document.getElementById('tempat_lahir').value,
-                tanggal_lahir: document.getElementById('tanggal_lahir').value,
-                alamat: document.getElementById('alamat').value,
-                telepon: document.getElementById('telepon').value,
-                email: document.getElementById('email').value,
-                nama_wali: document.getElementById('nama_wali').value,
-                tanggal: document.getElementById('tanggal').value,
-                tanggal_izin: document.getElementById('tanggal_izin').value,
-                alamat_perusahaan: document.getElementById('alamat_perusahaan').value,
-                perihal: document.getElementById('perihal').value,
-                alasan: document.getElementById('alasan').value,
-                lampiran: document.getElementById('lampiran').value
-            };
-            localStorage.setItem('suratIzinTidakMasukSekolah_v2', JSON.stringify(data));
-            alert('Draft surat izin tidak masuk sekolah berhasil disimpan!');
+            localStorage.setItem('dunnakCVDraft_v56_nofoto', JSON.stringify(cvData));
+            alert('Draft CV berhasil disimpan!');
         }
 
         function clearForm() {
-            if (confirm('Reset semua isi surat?')) location.reload();
+            if (confirm('Reset semua data CV?')) location.reload();
         }
 
+        // Inisialisasi
         window.onload = () => {
+            tambahPendidikan();
+            document.getElementById('pend-nama-0').value = "SMK Nurul Ummah Paninggaran - Teknik Jaringan Komputer dan Telekomunikasi";
+            document.getElementById('pend-tahun-0').value = "2023 - 2026";
+
+            tambahPengalaman();
+            document.getElementById('exp-posisi-0').value = "Magang IT Support";
+            document.getElementById('exp-perusahaan-0').value = "PT. ABC";
+            document.getElementById('exp-periode-0').value = "Januari – Maret 2025";
+            document.getElementById('exp-deskripsi-0').value = "• Maintenance dan troubleshooting jaringan\n• Instalasi perangkat jaringan\n• Membuat website sekolah";
+
+            tambahMagang();
+
             updatePreview();
         };
     </script>
